@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardDAO">
+
+	<!-- <if test="board1 ==''"> </if> <if test='board1.equals("a")'> </if> 
+		<if test='board1.equals("b")'> </if> <if test='board1.equals("c")'> </if> 
+		< insert into board (title) select max(seq)+1 from board -->
+
+
+
+	<insert id="insertBoard">
+
+		insert into board(title, writer, content) values(
+		#{title}, #{writer},
+		#{content})
+	</insert>
+
+	<insert id="autoInsert">
+		insert into board (title, content, writer)
+		values('test', 'select
+		max(seq)
+		from board', 'test')
+	</insert>
+	<insert id="autoRandomInsert">
+		insert into board (title) select max(seq)+1 from
+		board
+	</insert>
+
+	<update id="viewCount">
+		update board set cnt=cnt+1 where seq=#{seq}
+	</update>
+
+	<update id="updateBoard">
+		update board set title = #{title}, content=
+		#{content} where seq= #{seq}
+	</update>
+
+	<delete id="deleteBoard">
+		DELETE FROM board WHERE seq = #{seq}
+	</delete>
+	<delete id="deleteAll1">
+		DELETE FROM board
+	</delete>
+	<delete id="deleteAll2">
+		alter table board auto_increment=1
+	</delete>
+
+	<!-- getHighestSeq -->
+	<select id="getHighestSeq" resultType="int">
+		<if test="board1 == 'previous'">
+			SELECT max(seq) FROM BOARD
+		</if>
+		<if test='board1.equals("a")'>
+			SELECT max(seq) FROM BOARD
+		</if>
+		<if test='board1.equals("b")'>
+			SELECT max(seq) FROM BOARD
+		</if>
+		<if test='board1.equals("c")'>
+			SELECT max(seq) FROM BOARD
+		</if>
+	</select>
+
+	<!-- countBoard -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM BOARD
+		<if test='board1 .equals(null)'>
+			SELECT COUNT(*) FROM BOARD
+		</if>
+		<if test='board1.equals("a")'>
+			SELECT COUNT(*) FROM ABOARD
+		</if>
+		<if test='board1.equals("b")'>
+			SELECT COUNT(*) FROM BBOARD
+		</if>
+		<if test='board1.equals("c")'>
+			SELECT COUNT(*) FROM CBOARD
+		</if>
+	</select>
+
+	<!-- getBoardList -->
+	<select id="getBoardList" resultType="board">
+		<if test="board1 =='previous'">
+			select * from board
+		</if>
+		<if test="board1 =='a'">
+			select * from aboard
+		</if>
+		order by seq desc limit #{cntPerPage } offset #{offset }
+	</select>
+
+	<select id="getBoard" resultType="board">
+		SELECT * FROM board where seq=
+		#{seq}
+	</select>
+
+	<!-- SearchBoard -->
+	<select id="SearchBoard" resultType="board">
+		<if test="board1 =''">
+			select * from aboard where 1=1
+		</if>
+		<if test="board1.equals('a')">
+			select * from aboard where 1=1
+		</if>
+		<if test='board1.equals("b")'>
+			select * from bboard where 1=1
+		</if>
+		<if test='board1.equals("c")'>
+			select * from cboard where 1=1
+		</if>
+		<if test="searchCondition =='TITLE'"> and TITLE like concat('%',#{searchKeyword},'%')</if>
+		<if test="searchCondition =='CONTENT'"> and CONTENT like concat('%',#{searchKeyword},'%')</if>
+		order by seq desc limit #{cntPerPage } offset #{offset}
+	</select>
+
+</mapper>
