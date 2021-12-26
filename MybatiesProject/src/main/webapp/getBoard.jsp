@@ -81,18 +81,24 @@ width:100%;
 			<br>
 
 			<!-- 댓글 창 -->
-			<form name="fm" action="updateBoard.do" method="post">
+			<form name="fm" action="replyInsert.do" method="post">
+			<input value="${board.seq}" name="boardId" type="hidden">
+			<input value="" name="replywriter" type="hidden">
 				<div class="GetBoardReplyClassParenet">
 					<div class="input-group mb-3 GetBoardReplyClass">
 						<div class="GetBoardReplyClassParenetDiv">
-							<span class="input-group-text GetBoardReplyClassParenetSpan">댓글 번호 : ${reply.boardId } </span>
-							<span class="input-group-text GetBoardReplyClassParenetSpan"> 작 성 자 : ${reply.writer }</span>
+							<span class="input-group-text GetBoardReplyClassParenetSpan">댓글 번호 : ${reply.replyId } </span>
+							<span class="input-group-text GetBoardReplyClassParenetSpan"> 작 성 자 : ${reply.replyWriter }</span>
 						</div>
-						<textarea type="submit" class="form-control innm" name="cnt" value="${reply.content}"></textarea>
+						<textarea type="submit" class="form-control innm" name="cnt" value="${reply.replyContent}"></textarea>
 					</div>
 				</div>
 			</form>
-
+				private int replySeq;
+	private String replyId;
+	private String replyContent;
+	private String replyWriter;
+	private Date replyUpdate;
 
 			<div id="footer">
 				<button type="submit" class="btn btn-primary">글수정</button>
@@ -102,7 +108,5 @@ width:100%;
 			</div>
 		</form>
 	</div>
-
-
 </body>
 </html>
