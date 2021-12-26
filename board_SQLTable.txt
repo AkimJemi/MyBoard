@@ -1,0 +1,12 @@
+My Board Table
+CREATE TABLE IF NOT EXISTS `reply` (
+  `replyseq` int(5) NOT NULL AUTO_INCREMENT,
+ `replyId` int(5) NOT NULL,
+  `replywriter` varchar(20) NOT NULL,
+  `replycontent` varchar(20) NOT NULL,
+`replyregdate` datetime not null,
+  `replyupdate` datetime not null,
+  PRIMARY KEY (`replyseq`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;.
+
+

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface BoardService {
 
 	// CRUD 기능의 메소드 구현
@@ -29,7 +31,7 @@ public interface BoardService {
 	void autoInsert(BoardVO vo);
 
 	// 게시물 총 갯수
-	public int countBoard(BoardVO vo);
+	public int countBoard(@Param("vo") BoardVO vo);
 
 	void autodelete(BoardVO vo, int highestSeq);
 

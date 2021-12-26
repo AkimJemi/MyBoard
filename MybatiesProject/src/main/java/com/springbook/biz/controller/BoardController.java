@@ -174,10 +174,15 @@ public class BoardController {
 		}
 		vo.setBoard1(board1);
 		int total = boardDAO.countBoard(vo);
+		System.out.println("ss");
 		int offset = ((Integer.parseInt(nowPage) - 1) * Integer.parseInt(cntPerPage));
+		System.out.println("ss1");
 		this.total = total;
+		System.out.println("ss2");
 		this.offset = offset;
+		System.out.println("ss3");
 		vo = new BoardVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage), offset);
+		System.out.println("ss4");
 		if (keyword.equals("")) {
 			System.out.println("검색 기능 미실행");
 		} else {

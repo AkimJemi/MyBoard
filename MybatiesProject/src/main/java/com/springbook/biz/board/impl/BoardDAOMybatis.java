@@ -75,7 +75,7 @@ public class BoardDAOMybatis {
 	}
 
 	public int countBoard(BoardVO vo) {
-		System.out.println("board1 : " + vo);
+		System.out.println("board1 : " + vo.getBoard1());
 		return mybatis.selectOne("BoardDAO.countBoard");
 	}
 

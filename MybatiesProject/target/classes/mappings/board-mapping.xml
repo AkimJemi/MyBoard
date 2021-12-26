@@ -8,10 +8,7 @@
 		<if test='board1.equals("b")'> </if> <if test='board1.equals("c")'> </if> 
 		< insert into board (title) select max(seq)+1 from board -->
 
-
-
 	<insert id="insertBoard">
-
 		insert into board(title, writer, content) values(
 		#{title}, #{writer},
 		#{content})
@@ -49,45 +46,32 @@
 
 	<!-- getHighestSeq -->
 	<select id="getHighestSeq" resultType="int">
-		<if test="board1 == 'previous'">
-			SELECT max(seq) FROM BOARD
-		</if>
-		<if test='board1.equals("a")'>
-			SELECT max(seq) FROM BOARD
-		</if>
-		<if test='board1.equals("b")'>
-			SELECT max(seq) FROM BOARD
-		</if>
-		<if test='board1.equals("c")'>
-			SELECT max(seq) FROM BOARD
-		</if>
+		SELECT max(seq) FROM BOARD
+		<!-- <if test="board1 == 'previous'"> -->
+
+		<!-- </if> -->
+		<!-- <if test='board1.equals("a")'> SELECT max(seq) FROM BOARD </if> <if 
+			test='board1.equals("b")'> SELECT max(seq) FROM BOARD </if> <if test='board1.equals("c")'> 
+			SELECT max(seq) FROM BOARD </if> -->
 	</select>
 
 	<!-- countBoard -->
 	<select id="countBoard" resultType="int">
 		SELECT COUNT(*) FROM BOARD
-		<if test='board1 .equals(null)'>
+		<!-- <if test='board1 =="previous"'>
 			SELECT COUNT(*) FROM BOARD
-		</if>
-		<if test='board1.equals("a")'>
-			SELECT COUNT(*) FROM ABOARD
-		</if>
-		<if test='board1.equals("b")'>
-			SELECT COUNT(*) FROM BBOARD
-		</if>
-		<if test='board1.equals("c")'>
-			SELECT COUNT(*) FROM CBOARD
-		</if>
+		</if> -->
+		<!-- <if test='board1 eq "a"'> SELECT COUNT(*) FROM ABOARD </if> <if test='board1 
+			eq "b"'> SELECT COUNT(*) FROM BBOARD </if> <if test='board1 eq "c"'> SELECT 
+			COUNT(*) FROM CBOARD </if> -->
 	</select>
 
 	<!-- getBoardList -->
 	<select id="getBoardList" resultType="board">
-		<if test="board1 =='previous'">
-			select * from board
-		</if>
-		<if test="board1 =='a'">
-			select * from aboard
-		</if>
+		<!-- <if test="board1 =='previous'"> -->
+		select * from board
+		<!-- </if> -->
+		<!-- <if test="board1 =='a'"> select * from aboard </if> -->
 		order by seq desc limit #{cntPerPage } offset #{offset }
 	</select>
 
@@ -98,18 +82,12 @@
 
 	<!-- SearchBoard -->
 	<select id="SearchBoard" resultType="board">
-		<if test="board1 =''">
-			select * from aboard where 1=1
-		</if>
-		<if test="board1.equals('a')">
-			select * from aboard where 1=1
-		</if>
-		<if test='board1.equals("b")'>
-			select * from bboard where 1=1
-		</if>
-		<if test='board1.equals("c")'>
-			select * from cboard where 1=1
-		</if>
+		<!-- <if test="board1 =''"> -->
+		select * from aboard where 1=1
+		<!-- </if> -->
+		<!-- <if test="board1.equals('a')"> select * from aboard where 1=1 </if> 
+			<if test='board1.equals("b")'> select * from bboard where 1=1 </if> <if test='board1.equals("c")'> 
+			select * from cboard where 1=1 </if> -->
 		<if test="searchCondition =='TITLE'"> and TITLE like concat('%',#{searchKeyword},'%')</if>
 		<if test="searchCondition =='CONTENT'"> and CONTENT like concat('%',#{searchKeyword},'%')</if>
 		order by seq desc limit #{cntPerPage } offset #{offset}
